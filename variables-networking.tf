@@ -15,9 +15,3 @@ variable "idle_timeout_in_minutes" {
   type        = number
   default     = null
 }
-
-variable "create_apim_subnet" {
-  description = "Boolean if set to true a new subnet will be created. Otherwise a subnet id should be provided if VNET integration mode is internal or external"
-  type        = Boolean
-  default     = true
-}
