@@ -1,17 +1,17 @@
 ###### Public IP
 output "public_ip_id" {
   description = "The ID of this Public IP."
-  value       = azurerm_public_ip.this.id
+  value       = azurerm_public_ip.this[0].id
 }
 
 output "public_ip_address" {
   description = "The IP address value that was allocated."
-  value       = azurerm_public_ip.this.ip_address
+  value       = azurerm_public_ip.this[0].ip_address
 }
 
 output "public_ip_fqdn" {
   description = "The Public IP FQDN"
-  value       = azurerm_public_ip.this.fqdn
+  value       = azurerm_public_ip.this[0].fqdn
 }
 
 ########## API Management
