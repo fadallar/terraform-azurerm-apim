@@ -15,7 +15,7 @@ resource "azurerm_api_management" "this" {
     identity_ids = var.identity_ids
   }
 
-  public_ip_address_id          = var.public_ip_address_id
+  public_ip_address_id          = azurerm_public_ip.this.id
   public_network_access_enabled = var.public_network_access_enabled
   virtual_network_type          = var.virtual_network_type
 
@@ -37,6 +37,7 @@ resource "azurerm_api_management" "this" {
 # Creation of the apim logger entity
 #-------------------------------
 resource "azurerm_api_management_logger" "this" {
+  count = var.app_insights_id != null ? 1 : 0
   name                = "apim-app-insights-logger"
   api_management_name = azurerm_api_management.this.name
   resource_group_name = var.resource_group_name
@@ -51,6 +52,7 @@ resource "azurerm_api_management_logger" "this" {
 # API management service diagnostic
 #-------------------------------
 resource "azurerm_api_management_diagnostic" "this" {
+  count = var.app_insights_id != null ? 1 : 0
   identifier               = "applicationinsights"
   resource_group_name      = var.resource_group_name
   api_management_name      = azurerm_api_management.this.name

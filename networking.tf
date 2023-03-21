@@ -6,18 +6,7 @@ resource "azurerm_public_ip" "this" {
   zones                   = var.zones
   ddos_protection_mode    = var.ddos_protection_mode
   ddos_protection_plan_id = var.ddos_protection_plan_id
-  domain_name_label       = local.name
+  domain_name_label       = format("pip-%s", local.name)
   idle_timeout_in_minutes = var.idle_timeout_in_minutes
   tags                    = merge(var.default_tags, var.extra_tags)
 }
-
-
-
-
-
-
-
-
-
-
-
