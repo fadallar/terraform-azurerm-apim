@@ -17,3 +17,12 @@ variable "workload_info" {
     error_message = "Invalid variable: ${var.workload_info}. Variable name must start with a lowercase letter, end with an alphanumeric lowercase character, and contain only lowercase letters, digits, or a dash (-)."
   }
 }
+
+variable "landing_zone_slug" {
+  description = "Landing zone acronym,it will be used to generate the resource name"
+  type        = string
+  validation {
+    condition     = can(regex("^[a-z]([a-z0-9-]*[a-z0-9])?$", var.landing_zone_slug))
+    error_message = "Invalid variable: ${var.landing_zone_slug}. Variable name must start with a lowercase letter, end with an alphanumeric lowercase character, and contain only lowercase letters, digits, or a dash (-)."
+  }
+}
