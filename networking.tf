@@ -1,5 +1,5 @@
 resource "azurerm_public_ip" "this" {
-  count = var.virtual_network_type != "None" ? 1:0
+  count                   = var.virtual_network_type != "None" ? 1 : 0
   name                    = format("pip-%s", local.name)
   resource_group_name     = var.resource_group_name
   location                = var.location
