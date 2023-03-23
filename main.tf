@@ -28,6 +28,12 @@ resource "azurerm_api_management" "this" {
   zones = var.zones
 
   tags = merge(var.default_tags, var.extra_tags)
+
+  timeouts {
+    create = "90m"
+    delete = "90m"
+    update = "90m"
+  }
 }
 
 #-------------------------------
