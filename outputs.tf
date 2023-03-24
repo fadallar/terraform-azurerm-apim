@@ -31,16 +31,6 @@ output "gateway_regional_url" {
   value       = azurerm_api_management.this.gateway_regional_url
 }
 
-output "identity" {
-  description = "An identity block"
-  value       = azurerm_api_management.this.identity
-}
-
-output "hostname_configuration" {
-  description = " A hostname_configuration block"
-  value       = azurerm_api_management.this.hostname_configuration
-}
-
 output "management_api_url" {
   description = "The URL for the Management API associated with this API Management service."
   value       = azurerm_api_management.this.management_api_url
@@ -50,9 +40,25 @@ output "portal_url" {
   description = "The URL for the Publisher Portal associated with this API Management service."
   value       = azurerm_api_management.this.portal_url
 }
+
 output "developer_portal_url" {
   description = "The URL for the Developer Portal associated with this API Management service."
   value       = azurerm_api_management.this.developer_portal_url
+}
+
+output "scm_url" {
+  description = "The URL for the SCM (Source Code Management) Endpoint associated with this API Management service."
+  value       = azurerm_api_management.this.scm_url
+}
+
+output "identity" {
+  description = "An identity block"
+  value       = azurerm_api_management.this.identity
+}
+
+output "hostname_configuration" {
+  description = " A hostname_configuration block"
+  value       = azurerm_api_management.this.hostname_configuration
 }
 
 output "public_ip_addresses" {
@@ -65,10 +71,7 @@ output "private_ip_addresses" {
   value       = azurerm_api_management.this.private_ip_addresses
 }
 
-output "scm_url" {
-  description = "The URL for the SCM (Source Code Management) Endpoint associated with this API Management service."
-  value       = azurerm_api_management.this.scm_url
-}
+
 
 output "tenant_access" {
   description = "The tenant_access block"

@@ -19,3 +19,27 @@ variable "idle_timeout_in_minutes" {
   type        = number
   default     = null
 }
+
+variable "nsg_name" {
+  type        = string
+  description = "NSG name of the subnet hosting the APIM to add the rule to allow management if the APIM is private"
+  default     = null
+}
+
+variable "nsg_rg_name" {
+  type        = string
+  description = "Name of the RG hosting the NSG if it's different from the one hosting the APIM"
+  default     = null
+}
+
+variable "create_management_rule" {
+  type        = bool
+  description = "Whether to create the NSG rule for the management port of the APIM. If true, nsg_name variable must be set"
+  default     = false
+}
+
+variable "management_nsg_rule_priority" {
+  type        = number
+  description = "Priority of the NSG rule created for the management port of the APIM"
+  default     = 101
+}

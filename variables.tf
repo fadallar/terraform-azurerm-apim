@@ -21,7 +21,13 @@ variable "environment" {
 variable "stack" {
   description = "Project stack name."
   type        = string
+  validation {
+    condition     = var.stack == "" || can(regex("^[a-z0-9]([a-z0-9-]*[a-z0-9])?$", var.stack))
+    error_message = "Invalid variable: ${var.stack}. Variable name must start with a lowercase letter, end with an alphanumeric lowercase character, and contain only lowercase letters, digits, or a dash (-)."
+  }
 }
+
+#### APIM Specific
 
 variable "publisher_name" {
   description = ""
@@ -37,6 +43,10 @@ variable "sku_type" {
   description = "SKU Type valid values include: Consumption, Developer, Basic, Standard and Premium"
   type        = string
   default     = "Developer"
+  validation {
+    condition     = contains(["Consumption", "Developer", "Basic", "Standard", "Premium"], var.sku_type)
+    error_message = "Invalid variable: ${var.sku_type}. SKU Type valid values include: Consumption, Developer, Basic, Standard and Premium"
+  }
 }
 
 variable "sku_capacity" {
@@ -49,6 +59,10 @@ variable "identity_type" {
   description = "Specifies the type of Managed Service Identity that should be configured on this API Management Service. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both)."
   type        = string
   default     = "SystemAssigned"
+  validation {
+    condition     = contains(["SystemAssigned", "UserAssigned", "SystemAssigned, UserAssigned"], var.identity_type)
+    error_message = "Invalid variable: ${var.identity_type}.Identity type possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned"
+  }
 }
 
 variable "identity_ids" {
@@ -73,6 +87,10 @@ variable "virtual_network_type" {
   description = "The type of virtual network you want to use, valid values include: None, External, Internal."
   type        = string
   default     = "None"
+  validation {
+    condition     = contains(["None", "External", "Internal"], var.virtual_network_type)
+    error_message = "Invalid variable: ${var.virtual_network_type}.Virtual Network Type possible values are None, External, Internal"
+  }
 }
 
 variable "zones" {
@@ -97,4 +115,93 @@ variable "app_insigths_instrumentation_key" {
   description = "Instrumentation Key of the Application insights"
   type        = string
   default     = null
+}
+
+variable "client_certificate_enabled" {
+  description = ""
+  type        = bool
+  default     = false
+}
+
+variable "certificate_configuration" {
+  type        = list(map(string))
+  description = "List of certificate configurations"
+  default     = []
+}
+
+variable "enable_http2" {
+  type        = bool
+  description = "Should HTTP/2 be supported by the API Management Service?"
+  default     = false
+}
+
+variable "management_hostname_configuration" {
+  type        = list(map(string))
+  description = "List of management hostname configurations"
+  default     = []
+}
+
+variable "scm_hostname_configuration" {
+  type        = list(map(string))
+  description = "List of scm hostname configurations"
+  default     = []
+}
+
+variable "proxy_hostname_configuration" {
+  type        = list(map(string))
+  description = "List of proxy hostname configurations"
+  default     = []
+}
+
+variable "portal_hostname_configuration" {
+  type        = list(map(string))
+  description = "Legacy portal hostname configurations"
+  default     = []
+}
+
+variable "developer_portal_hostname_configuration" {
+  type        = list(map(string))
+  description = "Developer portal hostname configurations"
+  default     = []
+}
+
+variable "notification_sender_email" {
+  type        = string
+  description = "Email address from which the notification will be sent"
+  default     = null
+}
+
+variable "enable_sign_in" {
+  type        = bool
+  description = "Should anonymous users be redirected to the sign in page?"
+  default     = false
+}
+
+variable "enable_sign_up" {
+  type        = bool
+  description = "Can users sign up on the development portal?"
+  default     = false
+}
+
+variable "terms_of_service_configuration" {
+  type        = list(map(string))
+  description = "Map of terms of service configuration"
+
+  default = [{
+    consent_required = false
+    enabled          = false
+    text             = ""
+  }]
+}
+
+variable "ciphers_configuration" {
+  type        = map(string)
+  description = "Map of security configuration"
+  default     = {}
+}
+
+variable "policy_configuration" {
+  type        = map(string)
+  description = "Map of policy configuration"
+  default     = {}
 }
