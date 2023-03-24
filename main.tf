@@ -195,7 +195,7 @@ resource "azurerm_api_management_logger" "this" {
 # API management service diagnostic
 #-------------------------------
 resource "azurerm_api_management_diagnostic" "this" {
-  count                    = var.app_insights_id != null ? 1 : 0
+  count               = var.enable_app_insights ? 1 : 0
   identifier               = "applicationinsights"
   resource_group_name      = var.resource_group_name
   api_management_name      = azurerm_api_management.this.name
