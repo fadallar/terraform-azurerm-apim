@@ -180,7 +180,7 @@ resource "azurerm_api_management" "this" {
 # Creation of the apim logger entity
 #-------------------------------
 resource "azurerm_api_management_logger" "this" {
-  count               = var.app_insights_id != null ? 1 : 0
+  count               = var.enable_app_insights ? 1 : 0
   name                = "apim-app-insights-logger"
   api_management_name = azurerm_api_management.this.name
   resource_group_name = var.resource_group_name
