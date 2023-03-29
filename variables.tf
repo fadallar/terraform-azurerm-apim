@@ -107,8 +107,8 @@ variable "apim_subnet_id" {
 
 variable "enable_app_insights" {
   description = "Enable App insight for the APIM Logger"
-  type       = bool
-  default    = false
+  type        = bool
+  default     = false
 }
 
 variable "app_insights_id" {
